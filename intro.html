@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SQL Playground</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .password-container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        #passwordInput {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+        }
+
+        #submitPassword {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #submitPassword:hover {
+            background-color: #0056b3;
+        }
+
+        #passwordMessage {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .intro-content {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .intro-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .intro-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container password-container">
+        <h1>Enter Password</h1>
+        <p>Please enter the password you received after completing the game to proceed.</p>
+        <input type="password" id="passwordInput" placeholder="Your Password">
+        <button id="submitPassword">Submit Password</button>
+        <div id="passwordMessage"></div>
+    </div>
+
+    <div class="container intro-content hidden" id="introContent">
+        <h1>Welcome to the Interactive SQL Playground!</h1>
+        <p>Learn and practice SQL queries in a hands-on environment.</p>
+        <button id="start-button" class="intro-button">Go to SQL Playground</button>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPasswordButton = document.getElementById('submitPassword');
+        const passwordMessageDiv = document.getElementById('passwordMessage');
+        const introContentDiv = document.getElementById('introContent');
+        const goToSqlButton = document.getElementById('start-button');
+        const correctPassword = "SQL_FUN"; // Must match the password in index.html (game)
+
+        submitPasswordButton.addEventListener('click', function () {
+            const enteredPassword = passwordInput.value;
+            if (enteredPassword === correctPassword) {
+                passwordMessageDiv.textContent = "Password accepted!";
+                document.querySelector('.password-container').classList.add('hidden');
+                introContentDiv.classList.remove('hidden');
+            } else {
+                passwordMessageDiv.textContent = "Incorrect password. Please try again.";
+            }
+            passwordInput.value = ''; // Clear the input field
+        });
+
+        goToSqlButton.addEventListener('click', function () {
+            window.location.href = 'sql_playground.html';
+        });
+    </script>
+</body>
+
+</html>
