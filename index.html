@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .game-container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #guessInput {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+        }
+
+        #guessButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #guessButton:hover {
+            background-color: #1e7e34;
+        }
+
+        #passwordContainer {
+            margin-top: 30px;
+            font-size: 18px;
+            display: none;
+            /* Initially hidden */
+        }
+
+        #password {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .intro-button {
+            /* Style for the redirect button */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .intro-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container game-container">
+        <h1>Number Guessing Game</h1>
+        <p>Guess the secret number between 1 and 100.</p>
+        <input type="number" id="guessInput" placeholder="Enter your guess">
+        <button id="guessButton">Guess</button>
+        <div id="message"></div>
+        <div id="passwordContainer">
+            Congratulations! You guessed the number. Your password to access the introduction page is: <span
+                id="password">SQL_FUN</span>
+            <button id="proceedToIntro" class="intro-button">Proceed to Introduction</button>
+        </div>
+    </div>
+
+    <script>
+        const secretNumber = Math.floor(Math.random() * 100) + 1;
+        const guessInput = document.getElementById('guessInput');
+        const guessButton = document.getElementById('guessButton');
+        const messageDiv = document.getElementById('message');
+        const passwordContainer = document.getElementById('passwordContainer');
+        const passwordSpan = document.getElementById('password');
+        const proceedToIntroButton = document.getElementById('proceedToIntro');
+        const password = "SQL_FUN"; // The password the user gets
+
+        let attempts = 0;
+
+        guessButton.addEventListener('click', function () {
+            const guess = parseInt(guessInput.value);
+            attempts++;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                messageDiv.textContent = 'Please enter a valid number between 1 and 100.';
+            } else if (guess === secretNumber) {
+                messageDiv.textContent = `Congratulations! You guessed the number ${secretNumber} in ${attempts} attempts.`;
+                passwordSpan.textContent = password;
+                passwordContainer.style.display = 'block';
+                guessInput.disabled = true;
+                guessButton.disabled = true;
+            } else if (guess < secretNumber) {
+                messageDiv.textContent = 'Too low! Try guessing higher.';
+            } else {
+                messageDiv.textContent = 'Too high! Try guessing lower.';
+            }
+
+            guessInput.value = ''; // Clear the input field
+        });
+
+        proceedToIntroButton.addEventListener('click', function () {
+            window.location.href = 'intro.html';
+        });
+    </script>
+</body>
+
+</html>
