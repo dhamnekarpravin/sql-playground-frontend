@@ -1,0 +1,31 @@
+.results-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+#results {
+    width: 100%; /* Initially take full width of container */
+    overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+}
+
+table {
+    width: auto !important; /* Let content determine width, important to override other styles */
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap; /* Prevent wrapping */
+    min-width: 50px; /* Set a minimum width for each cell */
+}
+
+th {
+    background-color: #eee;
+}
